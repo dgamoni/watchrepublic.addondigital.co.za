@@ -704,14 +704,15 @@ if ( !class_exists( 'avia_product_slider' ) )
 									'operator' 	=>	'IN'
 							);
 			}			
-			
+			 $product_ids_on_sale = wc_get_product_ids_on_sale();
 			$query = array(
 							'post_type'				=>	$params['post_type'],
 							'post_status'			=>	'publish',
 							'ignore_sticky_posts'	=>	1,
 							'paged'					=>	$page,
 							'offset'            	=>	$params['offset'],
-							'post__not_in'			=>	( !empty( $no_duplicates ) ) ? $avia_config['posts_on_current_page'] : array(),
+							// 'post__not_in'			=>	( !empty( $no_duplicates ) ) ? $avia_config['posts_on_current_page'] : array(),
+							'post__not_in'			=>	(array) $product_ids_on_sale,
 							'posts_per_page'		=>	$params['items'],
 							'orderby'				=>	$ordering_args['orderby'],
 							'order'					=>	$ordering_args['order'],
